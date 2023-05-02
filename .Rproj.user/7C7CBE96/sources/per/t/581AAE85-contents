@@ -1,0 +1,552 @@
+---
+title:  'Homework 4'
+subtitle: 'INFO 523'
+author:
+- name: Student - Rob Speer
+- name: Instructor -  Cristian Román-Palacios
+  affiliation: School of Information, University of Arizona, Tucson, AZ
+tags: [R, RStudio, HW4]
+output: html_document
+
+---
+
+---------------
+
+### Objectives
+The goal of this homework is to walk you through the basics of plotting in `R`.  Creating visuals is one of the first steps to perform data mining operations. Please answer each question using either base `R` or `ggplot2` (indicated in each of the questions). Please note that the first part of the applied part of the homework has a particular sequence: starting from simple plots and ending in more complex visuals. At the end, you will have to recreate a given figure using your own code.
+
+---------------
+
+#### Additional resources relevant to this HW
+- **R Markdown**: Please review the basic R Markdown cheat sheet in case you have any questions regarding formatting the HW: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf.
+
+- **R**: Please review the basic `R` cheat sheet in case you have any questions regarding the programming language: https://www.soa.org/globalassets/assets/Files/Edu/2018/exam-pa-base-r.pdf.
+
+- **RStudio**: Additional cheat sheets written by RStudio to help with specific R packages: https://www.rstudio.com/resources/cheatsheets/
+
+- **Datasets**: The following website has access to the relevant datasets from the recommended textbook: https://book.huihoo.com/introduction-to-statistical-learning/data.html
+
+
+### Scores and grading policies
+
+There is a very basic auto-grading system implemented at the end of the assignment. Use that workflow as a reference. **If you're confident that answer is correct but it's still marked as Incorrect by the autograder, please get in touch with the intructor.** Grades are **NOT exclusively based on your final answers**. I will be grading the overall structure and logic of your code. Feel free to use as many lines as you need to answer each of the questions. I also highly recommend and strongly encourage adding comments (`#`) to your code. Comments will certainly improve the reproducibility and readability of your submission. Commenting your code is also good coding practice. **Specifically for the course, you’ll get better feedback if the instructor is able to understand your code in detail.** 
+
+
+### Submission:
+ This HW is due at the end of the same week that is released (**Sunday, 11:59 pm AZ time**). Please get in touch with the instructor if you’re (i) having issues opening the assignment, (2) not understanding the questions or (3) having issues submitting your assignment. Note that late submissions are subject to a penalty (see late work policies in the Syllabus). By the deadline, you should turn in a a `RMD` file (this file) **and** a rendered `HTML` (hint: knit your `rmd`; link: https://rmarkdown.rstudio.com/lesson-9.html). Answers to each question should be in the relevant block of code (see below). The instructor won't render your submission. **There's no need to rename your submission**. Make sure that you can correctly render your submission without errors before turning anything in. If a given block of code is causing issues and you didn’t get to fix it, please use `r eval=FALSE `the in the relevant block and add comments. **This assignment must be submitted through our GitHub Classroom before the deadline.**
+
+
+### Time commitment
+Please reach out if you’re taking more than ~18h to complete (1) this HW, (2) reading the book chapters, and (3) going over the lectures. I will be happy to provide accommodations if necessary. **Do not wait until the last minute to start working on this HW**. In most cases, working under pressure will certainly increase the time needed to answer each of these questions and the instructor might not be 100% available on Sundays to troubleshoot with you. Remember that you can sign up office hours with the instructor 3 times a week.
+
+
+### Looking for help?
+First, please go over the relevant readings for this week. Second, if you’re still struggling with any of the questions, do some independent research (e.g. stackoverflow is a wonderful resource). Don’t forget that your classmates will also be working on the same questions - reach out for help (check under the Discussion forum for folks looking to interact with other students in this class or start your own thread). Finally, the instructor will be happy to answer any questions during office hours. You can reach out to me by email (cromanpa94@arizona.edu) or simply schedule a 15 minute meeting through **Calendly** (https://calendly.com/cromanpa/15min). **Do not forget that the instructor holds office hours 3 times a week!!**
+
+
+---------------
+# Questions
+
+### Conceptual
+
+The conceptual questions outlined below are relative to the following dataset: https://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones.
+
+Please answer the questions below in a few sentences. There is no need to be extremely detailed. Save your answers as strings in the relevant objects (e.g. `q1`, `q2`, `q3`, `q4`). Use the structure outlined below for `q1.example`.
+
+```{r exampleQ1-4}
+q1.example <- "
+[Paragraph 1]
+[Paragraph 2]
+[Paragraph n]
+"
+```
+
+Please note that there's no need to provide extremely extensive and detailed answers (>1 paragraph). Just make sure that the main points that you're trying to make in relation to the question are clear in your answer.
+
+
+#### Question 1
+
+Regarding `ggplot2`, define the following terms: 
+
+- `Data`
+- `Geoms`
+- `Aestethics`
+- `Mappings`
+- `Scales`
+- `Guides`
+
+*Advice*: Feel free to write your answers in the `rmd` file. However, please make sure to write *any* string under `q1` for the autograder to work properly.
+
+```{r}
+# BEGIN SOLUTION
+q1 <-
+"
+- Data: As an option/parameter on the qplot() method in ggplot2, 'data' refers to the long or data frame used create the graph
+- Geoms: \"Specifies the geometric objects that define the graph type. The geom option is
+           expressed as a character vector with one or more entries. geom values include
+           'point', 'smooth', 'boxplot', 'line', 'histogram', 'density',
+           'bar', and 'jitter'.\" (Kabachoff, 2011 p390)
+- Aesthetics: Refers to the 'various formats that grid drawing functions take', like color and fill, line width/type/etc,
+              point shapes, and text and font settings. (https://cran.r-project.org/web/packages/ggplot2/vignettes/ggplot2-specs.html)
+- Mappings: Designate which aesthetic properties should be applied to which geometries
+- Scales: In ggplot2, the 'scales' argument define the settings for the axis numbers and formatting
+- Guides: Guides are the reference lines on the graph that align with scales to make the graph easier to read
+"
+# END SOLUTION
+```
+
+
+#### Question 2
+
+List three advantages of `ggplot2` over `base` `R` under `q2.1`. Next, list three advantages of `base` `R` `q2.2` over `ggplot2`.   
+
+```{r}
+# BEGIN SOLUTION
+q2.1 <- 
+"
+Advantages of ggplot2 over base R:
+1) Provides graphing abilities not included in base R, like interactive graphs
+2) Better default colors and legends
+3) Supports themes
+"
+q2.2 <-
+"
+Advantages of base R over ggplot2:
+1) Included in the base installation
+2) Does not need to be explicitly loaded
+3) Quick and easy for simple plots
+"
+# END SOLUTION
+```
+
+*Advice*: Feel free to write your answers in the `rmd` file. However, please make sure to write *any* string under `q2` (for the autograder to work properly).
+
+
+#### Question 3
+
+Your collaborator intends to plot the `mtcars` dataset using the following block of code. 
+
+```{r error=TRUE}
+library(ggplot2)
+ggplot(mtcars, aes(x = wt, y = mpg, shape=mpg)) +
+  geom_point()
+```
+
+Please briefly explain why the code doesn't run and how would you fix it.
+
+```{r}
+# BEGIN SOLUTION
+q3 <-
+"
+Running this snippet gives the following error:
+! A continuous variable cannot be mapped to the shape aesthetic
+ℹ choose a different aesthetic or use 'scale_shape_binned()'
+
+Adding the following will run the snippet and segment (bin) the shapes into 5 different bins:
+library(ggplot2)
+ggplot(mtcars, aes(x = wt, y = mpg, shape=mpg)) +
+  geom_point() + scale_shape_binned()
+  
+This could be further refined by using the (n.breaks) argument for the binning.
+"
+# END SOLUTION
+```
+
+*Advice*: Feel free to write your answers in the `rmd` file. However, please make sure to write *any* string under `q3` (for the autograder to work properly).
+
+
+#### Question 4
+
+What is your favorite data visualization constructed using `R` or `python`? Please insert an image to this `RMarkdown` document (see Question 7 for an example). Use `q4` to explain why is your favorite example of a data visualization and how you would recreate it (conceptually).
+
+![](NetworkGraph.png)
+
+```{r}
+# BEGIN SOLUTION
+
+q4 <- "
+This example of a Network Graph, found on data-to-viz.com, 'show interconnections
+between a set of entities. Each entity is represented by a Node (or vertice).
+Connection between nodes are represented through links'
+
+These graphs get complicated but can display data that is otherwise hard to display.
+
+And they look cool.
+
+A couple packages are available to build network diagraphs: igraph, ggraph, and networkD3.
+
+An example would be social networks, like Facebook, and mapping the connections within the social network.
+
+"
+# END SOLUTION
+```
+
+*Advice*: Feel free to write your answers in the `rmd` file. However, please make sure to write *any* string under `q4` (for the autograder to work properly).
+
+
+### Applied
+
+#### Question 5
+
+The following questions will be based on the following `Titanic` dataset. Please make sure that the `datasets` package is installed. Unless indicated otherwise, create plots using functions from the `ggplot2` `R` package. Finally, simply save the final plot in the relevant object indicated under each question.
+
+```{r}
+library(datasets)
+data(Titanic)
+```
+
+
+5.1.	What is the class of object `Titanic`? What variables does it have? Briefly explain.
+
+```{r}
+# BEGIN SOLUTION
+View(Titanic)
+q5.1 <- class(Titanic)
+
+Briefly_explain <- "
+The Titanic dataset contains the following columns:
+Class:    1st, 2nd, 3rd, or Crew
+Age:      Child or Adult
+Sex:      Male or Female
+Survived: Yes or No
+Freq:     Count of people in above categories
+
+"
+
+# END SOLUTION
+```
+
+*Advice*: Feel free to write your answers in the `rmd` file. However, please make sure to write *any* string under `q5.1` (for the autograder to work properly).
+
+
+5.2.	What kind of plot did you get running the following line? Why was the data plotted this way? What is your interpretation of this graph?
+
+```{r}
+plot(Titanic)
+```
+
+
+```{r}
+# BEGIN SOLUTION
+q5.2 <- "
+This appears as a Barplot:
+Class is on the X axis (it's the first column).
+Sex appears on the Y axis (it's the second column)
+Survived is a sub-category of Sex (it's the third column)
+Freq appears as propotional bars, since no further arguments were supplied to plot()
+
+If values were sent to the arguments for X,Y it would have been a scatter plot.
+"
+# END SOLUTION
+```
+
+*Hint: How would you plot data that is being used for a Chi-square test of independence? *
+
+*Advice*: Feel free to write your answers in the `rmd` file. However, please make sure to write *any* string under `q5.2` (for the autograder to work properly).
+
+
+5.3.	Transform `Titanic` into a `data.frame` and save it in `q5.3`. We’ll be using this object to create some visuals. 
+
+```{r}
+# BEGIN SOLUTION
+q5.3 <- as.data.frame(Titanic)
+# END SOLUTION
+```
+
+
+5.4.	Now, using `Titanic` (class `data.frame`) please create a canvas for the figure (i.e. a blank `ggplot` graph) showing only the axes: `class` (x axis) and `freq` (y axis). 
+
+```{r}
+# BEGIN SOLUTION
+q5.4 <- ggplot(q5.3, aes(x=Class, y=Freq))
+q5.4
+# END SOLUTION
+```
+
+
+5.5.	Display the data as a boxplot. Can you think of a better (or similar) way to display the visual patterns between `class` and `freq`? 
+
+```{r}
+# BEGIN SOLUTION
+q5.5 <- ggplot(q5.3, aes(x=Class, y=Freq)) + geom_boxplot()
+q5.5
+
+better_way <- "
+It's unclear from this graph what the other categories that contribute are.
+Sex, Age, and Survived are included as averages into the boxes but it's unknown
+what they contribute.
+
+A geom_col would summarize this data more, to see just the count of passengers in each class,
+ie ggplot(q5.3, aes(x=Class, y=Freq)) + geom_col()
+"
+# END SOLUTION
+```
+
+
+5.6.	Now, include the raw data on top of the boxplot. Use the `geom_jitter()`. Please make sure that outliers are not represented twice (e.g. plotted under the boxplot and in the scatterplot layers). The autograder assumes that the second layer of your plot is created using `geom_jitter()`. 
+
+
+```{r}
+# BEGIN SOLUTION
+q5.6 <- ggplot(q5.3, aes(x=Class, y=Freq)) + geom_boxplot() + geom_jitter()
+q5.6
+# END SOLUTION
+```
+
+
+5.7.	In `geom_jitter()`, set `width=0.25` and `alpha=0.5`. Explain what these arguments do. The autograder assumes that the second layer of your plot is created using `geom_jitter()`. Additionally, it checks for the `width=0.25` argument.
+
+```{r}
+# BEGIN SOLUTION
+q5.7 <- ggplot(q5.3, aes(x=Class, y=Freq)) + geom_boxplot() + geom_jitter(width=0.25, alpha=0.5, size=3, color='red', shape=16)
+q5.7
+arguments <- "
+In Jittered points, the width argument specifies, as a percentage, how much of the 
+width of the box the points can 'jitter' within. The 0.25 here means the points are
+spread over 25% of the box width. at width=1, the points will be distributed
+over the whole area of the X axis.
+
+Alpha is the opacity, in percent, of the points, where alpha=1 is 100% percent
+opaque, and 0% is totally transparent.
+"
+# END SOLUTION
+```
+
+
+5.8.	Create a bar plot with `Sex` in the x axis, `Freq` in the y axis. Set the  `fill` argument to `Age`.   
+
+```{r}
+# BEGIN SOLUTION
+q5.8 <- ggplot(q5.3, aes(x=Sex,y=Freq)) + geom_bar(aes(fill=Age), fun=sum, stat="summary") #Replace NULL with your final answer
+q5.8
+# END SOLUTION
+```
+
+
+5.9. Reconstruct the plot shown in Question 5.8 but using `base` `R`
+
+```{r}
+# BEGIN SOLUTION
+library(tidyverse)
+titanic_grouped <- q5.3 %>%
+  group_by(Sex) %>%
+  summarize(child_sum=sum(Freq[Age=='Child']), adult_sum=sum(Freq[Age=='Adult']))
+# titanic_grouped
+titanic_table <- as.table(as.matrix(titanic_grouped)) #table(titanic_grouped$Sex, titanic_grouped$adult_sum)
+# titanic_table
+base_r_plot <- barplot(titanic_table)
+q5.9 <- recordPlot() #Do NOT modify this line
+# END SOLUTION
+```
+
+5.10.	Reconstruct the plot shown in Question 5.8 but using `Plotly` in `R`. Feel free to use `ggplotly` if you find it convenient.
+
+```{r}
+# BEGIN SOLUTION
+library(plotly)
+titanic_grouped <- q5.3 %>% group_by(Sex) %>% summarize(child_sum=sum(Freq[Age=='Child']), adult_sum=sum(Freq[Age=='Adult']))
+# titanic_grouped
+plotly_barchart <- plot_ly(titanic_grouped, x=~Sex, y=~adult_sum, type='bar', name = 'Sex')
+plotly_barchart <- plotly_barchart %>% add_trace(y = ~child_sum, name = 'Age')
+plotly_barchart <- plotly_barchart %>% layout(barmode = 'stack')
+plotly_barchart
+q5.10 <- plotly_barchart #Replace NULL with your final answer
+# END SOLUTION
+```
+
+
+#### Question 6
+
+Retrieve the Titanic dataset from Kaggle (https://www.kaggle.com/c/titanic/). Note that this dataset is also part of the `Titanic` `R` package. We’ll be using the `train` dataset. Use plots to answer the following questions. I am looking to see what your perspective of the story is based on the visuals that you produce. Do not use formal models for this (e.g. regressions), just focus on the figures and tell your own story based on the data. **There is NO need to write anything in text besides the figure titles and subtitles (both included in the plot)**.
+
+**I expect to see high-quality figures (https://bbc.github.io/rcookbook/). If you have any questions on which the appropriate approach to plot a certain set of variables is, please check out this website: https://www.data-to-viz.com/. Ideally, each figure will have at least the following aspects:**
+
+1.	Labeled axes (with units)
+2.	A geometric layer
+3.	A descriptive title
+4.	A subtitle outlining the main patterns in the figure
+
+
+6.1.	What was the survival frequency on Titanic? Examine this question using any of the following variables: `gender`, `class`, `age`, and `ticket fare`. **Your answer should ONLY be a single plot with a title, subtitle, and as many panels as you need**
+
+```{r}
+# BEGIN SOLUTION
+train_dataset <- read.csv("titanic/train.csv")
+
+survived_summarize <- train_dataset %>%
+  group_by(Pclass, Survived) %>% count(Survived, name="Survived_Count")
+
+survived_summarize <- survived_summarize %>%
+  mutate(Survived = str_replace(Survived, "1", "Yes")) %>%
+  mutate(Survived = str_replace(Survived, "0", "No"))
+
+
+survival_by_class <- ggplot(survived_summarize, aes(fill=Survived, y=Survived_Count, x=Pclass)) + geom_bar(position="fill", stat="identity") +
+  labs(title="Percentage of Surviving Passengers by Class", subtitle="Survival rate of each passenger class", y="% (Percent Surviving)", x="Passenger Class") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values=c("black", "darkgreen"))
+
+survival_by_class
+
+q6.1 <- survival_by_class #Replace NULL with your final answer
+# END SOLUTION
+```
+
+
+6.2.	What was the order of priority to rescue passengers of `Titanic` (i.e. focus on `gender` and `age`)? **Your answer should ONLY be a single plot with a title, subtitle, and as many panels as you need**
+
+```{r}
+# BEGIN SOLUTION
+library(gridExtra)
+train_dataset <- read.csv("titanic/train.csv")
+# train_dataset
+
+age_summarize <- train_dataset %>%
+  group_by(Age, Survived) %>%
+  count(Survived, name="Survived_Count") %>%
+  filter(Survived==1)
+# age_summarize
+
+p1 <- ggplot(age_summarize, aes(x=Age, y=Survived_Count)) + 
+    geom_point(size=2, color="blue") +
+    labs(title="Count of Survivors by Age", subtitle="The highest number of survivors were\nin the 18-35 range", y="# of Survivors", x="Passenger Age")+
+    ylim(0,20)
+
+gender_summarize <- train_dataset %>%
+  group_by(Sex, Survived) %>%
+  count(Survived, name="Survived_count")
+
+gender_totals <- gender_summarize %>%
+  group_by(Sex) %>%
+  summarise_all(sum)
+  
+
+gender_summarize
+
+gender_percentages <- gender_summarize %>%
+  left_join(gender_totals, by=join_by(Sex)) %>%
+  mutate(SurvivedPercent=(Survived_count.x/Survived_count.y)) %>%
+  filter(Survived.x==1)
+gender_percentages
+
+p2 <- ggplot(gender_percentages, aes(y=SurvivedPercent, x=Sex)) +
+  geom_bar(stat="identity") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(title="Survival Rate by Gender", subtitle="74.2% of females survived,\nwhile only 18.9% of males survived", y="% (Percent Surviving)", x="Gender") +
+  scale_fill_manual(values=c("green", "red"))
+
+plot_grid <- grid.arrange(p1, p2, nrow = 1)
+
+q6.2 <- plot_grid #Replace NULL with your final answer
+# END SOLUTION
+```
+
+
+6.3.	What were the characteristics of the passengers that did not survive? Approach this question from the angle of `class`, `age`, or `fare`. **Your answer should ONLY be a single plot with a title, subtitle, and as many panels as you need**
+
+```{r}
+# BEGIN SOLUTION
+train_dataset <- read.csv("titanic/train.csv")
+# train_dataset
+
+fare_summarize <- train_dataset %>%
+  group_by(Fare, Survived) %>%
+  count(Survived, name="Survived_Count")
+
+fare_summarize <- fare_summarize %>%
+  mutate(Survived = str_replace(Survived, "1", "Yes")) %>%
+  mutate(Survived = str_replace(Survived, "0", "No"))
+
+p1 <- ggplot(fare_summarize, aes(x=Fare, y=Survived_Count, color=factor(Survived))) + 
+    geom_point() +
+    labs(title="Count of Survivors by Ticket Fare", subtitle="Passengers with higher ticket fare survived\nmore often then those with low ticket far", y="# of Survivors", x="Passenger Fare ($)")+
+    ylim(0,20)
+
+p1
+
+q6.3 <- p1 #Replace NULL with your final answer
+# END SOLUTION
+```
+
+6.4.	Was it a good idea to travel in big groups with parents/children or was it better to travel in small groups with siblings/spouses? **Your answer should ONLY be a single plot with a title, subtitle, and as many panels as you need**
+
+```{r}
+# BEGIN SOLUTION
+train_dataset <- read.csv("titanic/train.csv")
+# train_dataset
+
+siblingspouse_summarize <- train_dataset %>%
+  select(Survived, SibSp) %>%
+  group_by(Survived) %>%
+  summarise(mean_sibsp=mean(SibSp), .groups = 'drop')
+
+siblingspouse_summarize <- siblingspouse_summarize %>%
+  mutate(Survived = str_replace(Survived, "1", "Yes")) %>%
+  mutate(Survived = str_replace(Survived, "0", "No"))
+
+# siblingspouse_summarize
+
+p1 <- ggplot(siblingspouse_summarize, aes(x=Survived, y=mean_sibsp, fill=mean_sibsp)) + 
+    geom_bar(stat="identity") +
+    labs(title="Average Number of Siblings and Spouses per Survivor", subtitle="Passengers with fewer siblings or spouses\nsurvived more often then those with more\nsiblings or spouses.\nIt was not a good idea to travel in a large group.", y="Mean # of Siblings/Spouses", x="Survival")+
+    ylim(0,1)
+
+p1
+
+q6.4 <- p1 #Replace NULL with your final answer
+# END SOLUTION
+```
+
+
+#### Question 7
+
+Recreate the following plot using `ggplot2`. The dataset is provided below. Briefly explain what happens when only a single regression model is fit in the entire dataset (`Full data`) vs multiple models are analyzed per group. (**Extra credit [1 point]: what's the name of this paradox?**)
+
+![](data/plot.Q7.jpg)
+
+```{r message=FALSE}
+library(here)
+load(here("tests", "ref_WS.RData"))
+head(.data.q7) #Your target dataset
+
+library(ggplot2)
+
+# BEGIN SOLUTION
+p1 <- ggplot(.data.q7, aes(y=y, x=x2, shape=x1, color=x1)) +
+  geom_point() +
+  geom_smooth(method=lm, aes(fill=x1)) + 
+  xlab("Predictor X") +
+  ylab("Response Y") +
+  labs(title = "The effect is Simpson’s paradox,\nbut I can't figure out how to get it on the plot!") +
+  geom_smooth(method=lm)
+
+p1
+
+q7 <- p1 #Replace NULL with your final answer
+# END SOLUTION
+```
+
+
+## Some quick feedback
+
+**Do NOT modify this section.** 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, comment=NA}
+##Please make sure the following packages are installed
+library(digest); library(here); library(rmarkdown)
+load(here("tests", "ref_WS.RData"))
+save.image(here("tests", "answers_WS.RData"))
+ .grade(submission = list(q1, q2.1, q2.2, q3, q4, q5.1, q5.2,
+                        q5.3, q5.4, q5.5, q5.6, q5.7, q5.8, 
+                        q5.9, q6.1, q6.2, q6.3, q6.4, q7
+                        )
+        )
+
+cat("Last updated on:", format(Sys.time(),usetz = TRUE))
+```
+
+```{r echo= FALSE, message=FALSE, warning=FALSE, include=FALSE, results='hide'}
+render("README.Rmd", quiet = T)
+```
+
+

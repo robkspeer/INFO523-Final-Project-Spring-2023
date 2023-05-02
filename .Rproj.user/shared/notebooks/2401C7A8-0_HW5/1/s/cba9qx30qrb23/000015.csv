@@ -1,0 +1,12 @@
+"0","set.seed(3)"
+"0","appearance = list(default = ""lhs"", rhs = (""Survived=Yes""))"
+"0",""
+"0","# BEGIN SOLUTION"
+"0","library(arules)"
+"0",""
+"0","titanic_rules <- apriori(titanic, parameter = list(support = 0.001, confidence = 0.2), appearance = appearance)"
+"1","Apriori
+"
+"1","
+Parameter specification:
+"

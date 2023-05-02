@@ -1,0 +1,28 @@
+{
+    "id": "1EB005FF",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1683007124042.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "id": "01bd159fc0ca4d8cbdbad8b77d8fbc8a",
+        "name": "zoning_excludes",
+        "title": "zoning_excludes",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 29836824280170576,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1683007124042,
+    "read_only": false,
+    "read_only_alternatives": []
+}

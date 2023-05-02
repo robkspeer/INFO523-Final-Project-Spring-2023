@@ -1,0 +1,6 @@
+"0",""
+"0","gender_percentages <- gender_summarize %>%"
+"0","  left_join(gender_totals, by=join_by(Sex)) %>%"
+"0","  mutate(SurvivedPercent=(Survived_count.x/Survived_count.y)) %>%"
+"0","  filter(Survived.x==1)"
+"0","gender_percentages"

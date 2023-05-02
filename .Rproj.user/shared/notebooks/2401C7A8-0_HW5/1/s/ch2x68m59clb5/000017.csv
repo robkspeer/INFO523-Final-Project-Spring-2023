@@ -1,0 +1,5 @@
+"0","# BEGIN SOLUTION"
+"0","q6.2b.1 <- function.6.2(""Female"", ""Adult"", ""1st"") #Survival rate women in first-class fares"
+"0","q6.2b.2 <- function.6.2(""Female"", ""Child"", ""1st"") #Survival rate girls in first-class fares"
+"0",""
+"0","knitr::kable(q6.2b.1, align = ""lccrr"", caption = ""Survival Rate of Female, Adult, 1st Class"", digits = 1)"

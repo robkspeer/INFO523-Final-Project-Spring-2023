@@ -1,0 +1,73 @@
+library(tidyverse)
+library(dplyr)
+
+## load the meter read data
+meterreads <- read.csv("MeterReads.csv")
+
+## summarise the meters to find average monthly consumption, based on the
+## number of monthly reads in the data for the meters
+meterread_group <- meterreads %>%
+  group_by(meterno, zoning_desc) %>%
+  summarise(total_meter_consumption = sum(consumption), n_meter_reads = n()) %>%
+  mutate(avg_month_meter_consumption = total_meter_consumption/n_meter_reads)
+
+meterread_group
+
+meterread_plot <- ggplot(meterread_group, aes(x=zoning_desc, y=avg_month_meter_consumption)) + geom_boxplot() + geom_jitter()
+
+meterread_plot
+
+
+
+## Find the outlier
+outlier_meter <- meterread_group %>%
+  filter(avg_month_meter_consumption > 2500000) %>%
+  pull(meterno)
+
+outlier_address <- meterreads %>%
+  filter(meterno == outlier_meter) %>%
+  group_by(address) %>%
+  pull(address)
+
+outlier_address
+
+
+## Map the outliers
+library(ggmap)
+library(mapview)
+register_google(key = 'AIzaSyCBEv9VDx0FLeDhqB5patJdIH0twu7jaHE', write=TRUE)
+map_view <- mutate_geocode(head(as.data.frame(outlier_address),1), location = outlier_address, output = "latlona")
+map_view
+
+
+#map_view <- data.frame(outlier_address = c("1400 W MARS HLL RD"),
+#                       lon = c(-111.6648),
+#                       lat = c(35.20196))
+
+mapview(map_view, xcol="lon",ycol="lat", crs=4269, grid=FALSE)
+
+
+## Filter the outlier and plot again:
+meterread_group_filter <- meterread_group %>%
+  filter(meterno != outlier_meter)
+
+
+meterread_plot_filter <- ggplot(meterread_group_filter, aes(x=zoning_desc, y=avg_month_meter_consumption)) + geom_boxplot() + geom_jitter()
+meterread_plot_filter
+
+library(scales)
+options(scipen=999)
+meterread_plot_filter_under_500000 <- ggplot(meterread_group_filter, aes(x=zoning_desc, y=avg_month_meter_consumption)) +
+  geom_boxplot(outlier.shape = 21, outlier.color = "red")  +
+  ylim(0,500000) +
+  theme(axis.text.x = element_text(angle = 90))
+meterread_plot_filter_under_500000
+
+## Find average meter consumption per zoning type
+zoning_average <- meterread_group %>%
+  group_by(zoning_desc) %>%
+  summarise(total_month_zoning_consumption = sum(avg_month_meter_consumption), n_meters_per_zone = n()) %>%
+  mutate(avg_month_meter_consumption_by_zoning = total_month_zoning_consumption/n_meters_per_zone)
+
+zoning_average
+

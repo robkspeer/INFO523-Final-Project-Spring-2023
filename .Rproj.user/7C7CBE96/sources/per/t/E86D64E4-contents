@@ -1,0 +1,451 @@
+---
+title:  'Homework 3'
+subtitle: 'INFO 523'
+author:
+- name: Student - Rob Speer
+- name: Instructor -  Cristian Román-Palacios
+  affiliation: School of Information, University of Arizona, Tucson, AZ
+tags: [R, RStudio, HW3]
+output: html_document
+
+---
+
+---------------
+
+### Objectives
+This homework is divided into two parts. The written portion aims for a general description of one of the two datasets used in the hands-on portion of the assignment. In the hands-on component of the assignment, students will be asked to perform data manipulation operations using either (1) `base` `R` or the (2) `tidyverse`.
+
+---------------
+
+#### Additional resources relevant to this HW
+- **R Markdown**: Please review the basic R Markdown cheat sheet in case you have any questions regarding formatting the HW: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf.
+
+- **R**: Please review the basic `R` cheat sheet in case you have any questions regarding the programming language: https://www.soa.org/globalassets/assets/Files/Edu/2018/exam-pa-base-r.pdf.
+
+- **RStudio**: Additional cheat sheets written by RStudio to help with specific R packages: https://www.rstudio.com/resources/cheatsheets/
+
+
+### Scores and grading policies
+
+There is a very basic auto-grading system implemented at the end of the assignment. Use that workflow as a reference. **If you're confident that answer is correct but it's still marked as Incorrect by the autograder, please get in touch with the instructor.** Grades are **NOT exclusively based on your final answers**. I will be grading the overall structure and logic of your code. Feel free to use as many lines as you need to answer each of the questions. I also highly recommend and strongly encourage adding comments (`#`) to your code. Comments will certainly improve the reproducibility and readability of your submission. Commenting your code is also good coding practice. **Specifically for the course, you’ll get better feedback if the instructor is able to understand your code in detail.** 
+
+
+### Submission:
+Information on the deadline for this HW is posted in D2L.  Please get in touch with the instructor if you’re (i) having issues opening the assignment, (2) not understanding the questions or (3) having issues submitting your assignment. Note that late submissions are subject to a penalty (see late work policies in the Syllabus). By the deadline, you should turn in a a `RMD` file (this file) **AND** a rendered `HTML` (hint: knit your `rmd`; link: https://rmarkdown.rstudio.com/lesson-9.html). Answers to each question should be in the relevant block of code (see below). The instructor won't render your submission. **There's no need to rename your submission**. Make sure that you can correctly render your submission without errors before turning anything in. If a given block of code is causing issues and you didn’t get to fix it, please use `r eval=FALSE `the in the relevant block and add comments. **This assignment must be submitted through our GitHub Classroom before the deadline.**
+
+
+### Time commitment
+Please reach out if you’re taking more than ~18h to complete (1) this HW, (2) reading the book chapters, and (3) going over the lectures. I will be happy to provide accommodations if necessary. **Do not wait until the last minute to start working on this HW**. In most cases, working under pressure will certainly increase the time needed to answer each of these questions and the instructor might not be 100% available on Sundays to troubleshoot with you. Remember that you can sign up office hours with the instructor 3 times a week.
+
+
+### Looking for help?
+First, please go over the relevant readings for this week. Second, if you’re still struggling with any of the questions, do some independent research (e.g. stackoverflow is a wonderful resource). Don’t forget that your classmates will also be working on the same questions - reach out for help (check under the Discussion forum for folks looking to interact with other students in this class or start your own thread). Finally, the instructor will be happy to answer any questions during office hours. You can reach out to me by email (cromanpa94@arizona.edu) or simply schedule a 15 minute meeting through **Calendly** (https://calendly.com/cromanpa/15min). **Do not forget that the instructor holds office hours 3 times a week!!**
+
+
+---------------
+# Questions
+
+### Conceptual
+
+The conceptual questions outlined below are based on the following dataset: https://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones.
+
+Please answer the questions below in a few sentences (<300 words each). Save your answers as strings in the relevant objects (e.g. `q1`, `q2`, `q3`, `q4`). Use the structure outlined below in `q1.4.example`.
+
+```{r exampleQ1-4}
+q1.4.example <- "
+[Paragraph 1]
+[Paragraph 2]
+[Paragraph n]
+"
+```
+
+Please note that there's no need to provide extensive and detailed answers (i.e. <300 words). Just make sure that the main points that you're trying to make in relation to the question are clear.
+
+
+#### Question 1
+
+Briefly describe the dataset and explain how it has been used in previous analyses. 
+
+```{r}
+# BEGIN SOLUTION
+q1 <- "
+The 2012 dataset includes motion sensor data from a cellphone including the
+accellerometer and gyroscope, for 30 participants performing activies. The
+purpose of the dataset was to determine the activity being performed from
+data collected from the sensors.
+"
+# END SOLUTION
+```
+
+
+#### Question 2
+
+List two questions that previous studies have asked using this dataset. Cite the relevant studies.
+
+```{r}
+# BEGIN SOLUTION
+q2 <- "
+1) What is the current state of the user, based on the sensors in the phone, for
+the purposes of healthcare applications such as 'daily activity monitoring
+for elderly people.'
+Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L.
+Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass
+Hardware-Friendly Support Vector Machine. International Workshop of Ambient
+Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
+
+2) Is it possible to substitute the standard Multiclass SVM model with more
+efficient fixed-point representations?
+
+Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra, Jorge L. Reyes-Ortiz.
+Energy Efficient Smartphone-Based Activity Recognition using Fixed-Point Arithmetic.
+Journal of Universal Computer Science. Special Issue in Ambient Assisted Living:
+Home Care. Volume 19, Issue 9. May 2013
+"
+# END SOLUTION
+```
+
+
+#### Question 3
+
+There are two main folders in the dataset: training and testing. What are these files used for and what is their importance in Data Science in general?
+
+```{r}
+# BEGIN SOLUTION
+q3 <- "
+The 'training' dataset was used for training the model - to determine the
+equations of the model.
+
+The 'testing' dataset is used to check the accuracy of model.
+"
+# END SOLUTION
+```
+
+
+#### Question 4
+
+Choose one paper from the “Relevant Papers” section in the website. State the question that was examined in the study. Briefly outline the methods used in the paper (e.g. algorithms). Was there any data cleaning step? Explain. List the main conclusions of the study. Finally, include at least two suggestions that you think might help improve the quality of the paper. 
+
+```{r}
+# BEGIN SOLUTION
+q4 <- "
+The paper 'Energy Efficient Smartphone-Based Activity Recognition
+using Fixed-Point Arithmetic' sought to determine if using fixed-point arithmetic
+is as accurate in determining human activities as floating-point arithmetic is.
+The authors suggest that using the simpler arithmetic could improve recognition
+accuracy and battery life of the device.
+
+Data cleaning involved filtering certain frequencies to remove noise of gravity
+on the sensors.
+The data was also segmented into 'fixed-width sliding windows' which extracted a
+vector of '17 features estimated from a set of measures' that further isolated
+the data.
+
+The authors did find that 'some of the error values with fixed-point representation
+were smaller than the one found with teh MC-SVM approach', suggesting that they
+can in fact use fixed-point arithmetic instead of floating-point arithmetic.
+
+They also found that fixed-point represenations were much faster to process
+by the phone, where floating-point representations took much longer, leading to
+increased battery usage.
+
+The authors were successful in finding a faster, more power efficient method of 
+determining type of activity then previous models.
+
+The authors used as sample size of 30 partipants. They
+may have used a larger sample size to both train and test their model, which
+might have lead to higher accuracy.
+
+They also used one specific device to collect the data: a Samsung Galaxy S2 phone.
+It may have been for reasons of control, but I think it would be interesting to
+see if other devices had the same trainability and predictability.
+"
+# END SOLUTION
+```
+
+
+### Applied
+
+Please answer the following questions using `R`. Feel free to use as many lines of code as you need. The final result should be stored in the object indicated under each question. I provide hints using either `base` `R` and or functions from the `tidyverse`. There's no need to follow these hints.
+
+
+#### Question 5
+
+We will be working with the following dataset: https://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones. This dataset was also used in the conceptual section of this homework.  **Please DO NOT push the dataset to your `GitHub` repo** (e.g. use `gitignore`). **You will be penalized (-2 points) if your final submission to `Github` includes the original files of the analyzed dataset**. All the files in this homework are structured such that the dataset is not pushed to GitHub. 
+
+Same as in the previous homeworks, answer the questions below by saving the final object in the relevant object. Feel free to also use as many steps or lines of code as you need to answer each of the questions. Please annotate your code.
+
+I'll provide some help to download the dataset to your working directory:
+
+```{r Do not modify this}
+# library(here)
+# library(downloader)
+# if(! "UCI HAR Dataset" %in% list.files("data")){
+# url <- "https://archive.ics.uci.edu/ml/machine-learning-databases/00240/UCI%20HAR%20Dataset.zip"
+# download(url, dest=here("data","dataset.zip"), mode="wb")
+# unzip(here("data","dataset.zip"), exdir = here("data"))
+# }
+```
+
+Once you have run the code above, the downloaded folder will be located under `data`. **Note that you cannot commit files that are >100 mb**. Please check the size of the files that you're trying to commit **before** commiting+pushing to GitHub. Now, please focus on the questions below. All the instructions in the following questions are relative to the `UCI HAR Dataset` folder.
+
+5.1.	Read the training set (`train/X_train.txt`) into `R` and name it `train`. Rename all the columns using the correct column name using the labels listed in the `train/features.txt` file. Make all column names unique. Save the resulting dataset as `q5.1`. Your answer should have `7352` rows and  `561` columns.
+
+```{r}
+# BEGIN SOLUTION
+library(tidyverse)
+cols <- read.table("data/features.txt", header=FALSE)
+cols_names <- cols %>%
+  dplyr::select(V2)
+cols_names_list <- as.list(cols_names)
+
+x_train_table <- read.table("data/train/X_train.txt", col.names=cols_names_list[[1]])
+# x_train_table
+q5.1 <- x_train_table
+# END SOLUTION
+```
+
+*Hint: (`Base` `R`): `make.unique()` *.
+
+
+5.2.	Create a new column named `discrete` in `q5.1`. This column should include the content of `train/y_train.txt`. The resulting object should be saved in an object named `q5.2`. The resulting object should differ from `q5.1` by a single column.
+
+```{r}
+# BEGIN SOLUTION
+y_train_table <- read.table("data/train/y_train.txt", col.names = c("discrete"))
+y_train_list <- as.list(y_train_table)
+# y_train_list[[1]]
+join_table <- x_train_table %>% mutate(discrete = c(y_train_list[[1]])) ## , .before="tBodyAcc.mean...X")
+# join_table
+q5.2 <- join_table
+# END SOLUTION
+```
+
+*Hint: (tidyverse): mutate() and if_else() *
+
+
+5.3.	Using `q5.2`, remove the `angle(X,gravityMean)` column. The resulting object should be named `q5.3`. The resulting object should have the same dimensions as `q5.1`, but not the exactly the same features.
+
+```{r}
+# BEGIN SOLUTION
+remove_col_df <- q5.2 %>%
+  select(-contains("angle.X.gravityMean."))
+q5.3 <- remove_col_df #Replace NULL with your final answer
+# END SOLUTION
+```
+
+*Hint: (base): grep() or grepl() *
+
+
+5.4.	Next, reorder the columns in `q5.3` such that the columns with mean values (i.e. pattern *`mean`*) appear first in the dataset. Store the results in `q5.4`. 
+
+```{r}
+# BEGIN SOLUTION
+q5.4 <- q5.3 %>% relocate(contains("mean"))
+# END SOLUTION
+```
+
+*Hint: (tidyverse): select() and contains() *
+
+
+5.5.	Using `q5.3`, select the first *4* rows of every column summarizing the *`angle`* between vectors (i.e. colum names including the string *`angle`*). Save the resulting dataset as `q5.5`. Your resulting dataset should have `4` rows and `6` columns.
+
+```{r}
+# BEGIN SOLUTION
+q5.5 <- q5.3 %>% select(contains("angle")) %>% slice(1:4)
+# END SOLUTION
+```
+
+*Hint: (base): grep() or grepl() *
+
+
+5.6.	Using `q5.3`, remove all the rows with *at least* one observation falling outside of quantiles `0.025` and `0.975` of *at least one* column in the dataset. Note that these observations are referred as "extreme" in Question 5.7. Store the resulting object in `q5.6`. Do not use the full dataset for this question - please sample *ONLY* the first `1000` rows and `20` columns. Your answer should have `644` rows and  `20` columns.
+
+*One option (using `base` `r`): Estimate the `0.025` and `0.975` quantiles for each column in `q5.3`. Save the resulting data.frame to the environment (e.g. quantileDataset object). Next, for a given row in `q5.3`, sample the a column and test if the sampled value in `q5.3` (i.e. [row n,column n]) is within the interval estimated for that  column in `quantileDataset`. If the value in `q5.3` is outside of the interval (`quantileDataset`), replace the cell with an `NA`. If the value in `q5.3` is not outside of the interval, keep the original value for that cell in `q5.3`. Do the same for each observation (i.e. column) in each row. Finally, drop all the `NAs` in your dataset. Please do NOT overwrite your answer for `q5.3`*
+
+```{r}
+# BEGIN SOLUTION
+
+## Create the subset of first 20 columns and first 1000 rows.
+## Column 1 is the row numbers. Start at 2:21
+subset_df <- q5.3[,2:21] %>% slice(1:1000) ## TODO: REPLACE WITH 1000
+# quantileDataset <- test_df %>% slice(1:2)
+
+## Loop all the columns in the subset dataframe
+for(i in 2:ncol(subset_df)) { ## column 1 is row numbers
+  ## Convert the values in the column to a list to feed into the quantile() method
+  column_vals_as_list <- subset_df[[i]]
+  
+  ## Calculate the quantiles
+  quantileDataset <- unname(quantile(column_vals_as_list, na.rm=T, probs = c(0.025, 0.975)))
+  lowerQuantile <- quantileDataset[1]
+  upperQuantile <- quantileDataset[2]
+  ## Testing:
+  # print(lowerQuantile)
+  # print(upperQuantile)
+  
+  ## Get the column with index i
+  current_working_column <- subset_df %>%
+                            dplyr::select(all_of(i))
+  ## Testing:
+  # print(current_working_column)
+  
+  ## Now loop all the rows in the column
+  for(j in 1:nrow(current_working_column)) {
+    
+    ## Get the value of the row we're on in the loop
+    current_value <- current_working_column[j,]
+    
+    ## Test if it's outside the range of the quantiles
+    if (current_value <= lowerQuantile | current_value >= upperQuantile) {
+      
+      ## Set the current row's value to NA if it's outside the quantiles.
+      current_working_column[j,] <- NA
+    }
+  }
+
+  ## Replace the column in the subset_df with the values in the current working column
+  subset_df[i] <- current_working_column
+}
+
+## Remove all incomplete cases - those with a NA in the row:
+df_omit <- na.omit(subset_df)
+
+## Print for answer validation - 644 rows and 20 columns
+print(nrow(df_omit))
+
+# df_omit
+
+q5.6 <- df_omit
+# END SOLUTION
+```
+
+*Hint: (base): for(), if(), na.omit() *
+
+*Hint: (tidyverse): mutate(), across(), if_else(), na.omit()*
+
+
+#### Question 6 (extra credit, 1 point each)
+
+Read in the `data/population-figures-by-country-csv.csv` file that is included in your repo into `R` and simply call it `data`. This dataset contains population information on almost every country between `1960` and `2016`. Make sure that you remove line `257` (i.e. country `World`) before you get started with the questions below.
+
+6.1.	First, rename the second column of `data` to `code`. Now, reshape `data` from wide to long format. Sort the resulting dataset by country first and then by year. Next, for each country, keep only the oldest and most recent years with non-missing values for population sizes. Based these two years and corresponding population values, calculate the following three columns: (1) `Diff_year` (difference in time between years), (2) `Diff_growth` (difference in population size between years), and (3) `Rate_percent` = ((`Diff_growth` / `Diff_year`)/`oldest_year`). The resulting dataset should only include only the following columns: `Country`, `code`, `Diff_year`, `Diff_growth`, and `Rate_percent.` Save the resulting object in `q6.1`. Feel free to use as many lines of code as needed.
+
+```{r}
+# BEGIN SOLUTION
+data <- read.csv("data/population-figures-by-country-csv.csv", sep=",", header=TRUE)
+
+## Replace data with a new df that filters out World
+data <- data %>% filter(Country!="World")
+
+## Replace data with the new df that renames Country_Code
+data <- data %>% rename(code = Country_Code)
+
+## Get a vector of all the column names, except for Country and code
+names <- (colnames(data))
+names <- names[!names %in% c("Country", "code")]
+
+## Pivot to make the table long format
+data_long <- data %>%
+  pivot_longer(names)
+data_long_sort <- arrange(data_long, Country, name)
+data_long_sort_omit <- na.omit(data_long_sort)
+
+## Get only the minimum and maximum years
+grouped_min <- data_long_sort_omit %>%
+  group_by(Country) %>% slice_min(n = 1, name)
+grouped_max <- data_long_sort_omit %>%
+  group_by(Country) %>% slice_max(n = 1, name)
+
+## Then append them to each other
+grouped <- rbind(grouped_min, grouped_max)
+## Resort the grouped table
+grouped_sort <- arrange(grouped, Country, name)
+
+## Pivot back to wide, so that "MinYear" and "MaxYear" are as columns
+data_wide <- grouped_sort %>% pivot_wider(
+ names_from = name,
+ values_from = value
+)
+
+
+## (1) `Diff_year` (difference in time between years), (2) `Diff_growth` (difference in population size between years), and (3) `Rate_percent` = ((`Diff_growth` / `Diff_year`)/`oldest_year`).
+data_calc <- data_wide %>%
+  mutate(Diff_year = case_when(!is.na(Year_2016) ~ 2016 - 1960,
+                                                        !is.na(Year_2011) ~ 2011 - 1960,
+                                                        !is.na(Year_1990) ~ 1990 - 1960,
+                                                        !is.na(Year_1998) ~ 1998 - 1960)) %>%
+  mutate(Diff_growth = case_when(!is.na(2016) ~ Year_2016 - Year_1960,
+                                                        !is.na(Year_2011) ~ Year_2011 - Year_1960,
+                                                        !is.na(Year_1990) ~ Year_1990 - Year_1960,
+                                                        !is.na(Year_1998) ~ Year_1998 - Year_1960)) %>%
+  mutate(Rate_percent = ((Diff_growth/Diff_year)/1960)) 
+
+# The resulting dataset should only include only the following columns: `Country`, `code`, `Diff_year`, `Diff_growth`, and `Rate_percent.`
+final_table <- data_calc %>% select(Country, code, Diff_year, Diff_growth, Rate_percent)
+# final_table
+
+q6.1 <- final_table
+# END SOLUTION
+```
+
+
+6.2.	Split `q6.1` into a continent-based list. Save the result in `q6.2`. Use only the countries that overlap with the following dataset `data/country-and-continent-codes-list.csv`. Please provide two ideas on how this new list could be used to perform calculations with functions within the `apply` family.
+
+```{r}
+# BEGIN SOLUTION
+continents <- read.csv("data/country-and-continent-codes-list.csv", sep=",", header=TRUE)
+
+continents <- continents %>% rename("code" = "Three_Letter_Country_Code")
+
+joined_tables <- left_join(q6.1, continents, by=c("code"))
+
+joined_tables <- joined_tables %>% select(Country, code, Diff_year, Diff_growth, Rate_percent, Continent_Name)
+
+joined_tables_omit <- na.omit(joined_tables)
+
+grouped_table <- joined_tables_omit %>%
+  group_by(Continent_Name) %>% summarise(sum_growth = sum(Diff_growth))
+
+grouped_table
+
+q6.2 <- grouped_table
+
+idea_1 <- "
+If the dataframe weren't summarised, it could be reshaped in long format to include
+countries and their growth as columns. Then apply could be used to easily sum
+the individual countries by each continent for a total sum, instead of using summarise"
+
+idea_2 <- "
+Using tapply(), a mean growth, per country, per continent could be found.
+"
+
+# END SOLUTION
+```
+
+
+
+## Some quick feedback
+
+**Do NOT modify this section.** Note that the auto-grader tests whether objects in questions 1-4 include any string, and examine if dimensions (i.e. number of columns, rows, or length) of the objects in questions 5 and 6 match a reference.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, comment=NA}
+##Please make sure the following packages are installed
+library(digest); library(here); library(rmarkdown)
+load(here("tests", "ref_WS.RData"))
+rm(list=setdiff(ls(), c("q1", "q2", "q3", "q4", "q5.1", "q5.2",
+                       "q5.3", "q5.4", "q5.5", "q5.6", 
+                       "q6.1", "q6.2"))) #Prevent saving extra objects...
+save.image(here("tests", "answers_WS.RData"))
+.grade(submission = list(q1, q2, q3, q4, q5.1, q5.2,
+                       q5.3, q5.4, q5.5, q5.6, 
+                       q6.1, q6.2
+                       )
+       )
+
+cat("Last updated on:", format(Sys.time(),usetz = TRUE))
+```
+
+```{r echo= FALSE, message=FALSE, warning=FALSE, include=FALSE, results='hide'}
+render("README.Rmd", quiet = T)
+```
+

@@ -1,0 +1,5 @@
+"0","# BEGIN SOLUTION"
+"0","lift_greater_three <- subset(titanic_rules, subset = lift > 3)"
+"0","sorted_rules <- sort(lift_greater_three, by=""lift"")"
+"0",""
+"0","inspect(sorted_rules)"

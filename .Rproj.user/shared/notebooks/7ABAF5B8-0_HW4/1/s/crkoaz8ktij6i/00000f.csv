@@ -1,0 +1,3 @@
+"0","# BEGIN SOLUTION"
+"0","q5.5 <- ggplot(q5.3, aes(x=Class, y=Freq)) + geom_boxplot()"
+"0","q5.5"

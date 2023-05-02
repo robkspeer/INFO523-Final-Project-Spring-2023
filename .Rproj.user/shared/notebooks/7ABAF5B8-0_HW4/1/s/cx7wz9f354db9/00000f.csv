@@ -1,0 +1,35 @@
+"0","# BEGIN SOLUTION"
+"0","library(gridExtra)"
+"2","
+Attaching package: ‘gridExtra’
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    combine
+
+"
+"0","train_dataset <- read.csv(""titanic/train.csv"")"
+"0","# train_dataset"
+"0",""
+"0","age_summarize <- train_dataset %>%"
+"0","  group_by(Age, Survived) %>%"
+"0","  count(Survived, name=""Survived_Count"") %>%"
+"0","  filter(Survived==1)"
+"0","# age_summarize"
+"0",""
+"0","p1 <- ggplot(age_summarize, aes(x=Age, y=Survived_Count)) + "
+"0","    geom_point(size=2, color=""blue"") +"
+"0","    labs(title=""Count of Survivors by Age"", subtitle=""The highest number of survivors were\nin the 18-35 range"", y=""# of Survivors"", x=""Passenger Age"")+"
+"0","    ylim(0,20)"
+"0",""
+"0","gender_summarize <- train_dataset %>%"
+"0","  group_by(Sex, Survived) %>%"
+"0","  count(Survived, name=""Survived_count"")"
+"0",""
+"0","gender_totals <- gender_summarize %>%"
+"0","  group_by(Sex) %>%"
+"0","  summarise_all(sum)"
+"0","  "
+"0",""
+"0","gender_summarize"

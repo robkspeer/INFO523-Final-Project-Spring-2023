@@ -1,0 +1,5 @@
+"0","# BEGIN SOLUTION"
+"0","q7.4.1 <- function.6.2(""Female"", ""Child"", ""2nd"") # #3 with lift of 3.095649"
+"0","q7.4.2 <- function.6.2(""Male"", ""Child"", ""2nd"") # #7 with lift of 3.009650"
+"0",""
+"0","knitr::kable(q7.4.1, align = ""lccrr"", caption = ""Survival Rate of Female, Child, 2nd Class"", digits = 1)"

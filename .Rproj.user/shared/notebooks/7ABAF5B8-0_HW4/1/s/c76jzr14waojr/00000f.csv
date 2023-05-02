@@ -1,0 +1,3 @@
+"0","# BEGIN SOLUTION"
+"0","q5.8 <- ggplot(q5.3, aes(x=Sex,y=Freq)) + geom_bar(aes(fill=Age), fun=sum, stat=""summary"") #Replace NULL with your final answer"
+"0","q5.8"

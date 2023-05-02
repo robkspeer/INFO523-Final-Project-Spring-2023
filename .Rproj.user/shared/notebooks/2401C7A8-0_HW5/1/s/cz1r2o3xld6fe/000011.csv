@@ -1,0 +1,5 @@
+"0","# BEGIN SOLUTION"
+"0","library(arulesViz)"
+"0","plot(titanic_rules)"
+"2","To reduce overplotting, jitter is added! Use jitter = 0 to prevent jitter.
+"

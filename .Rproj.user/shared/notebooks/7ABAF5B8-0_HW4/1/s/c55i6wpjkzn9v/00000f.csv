@@ -1,0 +1,21 @@
+"0","library(ggplot2)"
+"0","ggplot(mtcars, aes(x = wt, y = mpg, shape=mpg)) +"
+"0","  geom_point()"
+"1","[1m[33mError[39m in `geom_point()`:[22m
+[38;5;254m[33m![38;5;254m Problem while computing aesthetics.
+[36mℹ[38;5;254m Error occurred in the 1st layer.[39m
+[1mCaused by error in `scale_f()`:[22m
+[38;5;254m[33m![38;5;254m A continuous variable cannot be mapped to the [32mshape[38;5;254m aesthetic
+[36mℹ[38;5;254m choose a different aesthetic or use `scale_shape_binned()`[39m
+Backtrace:
+[90m  1. [39m[1mbase[22m (local) `<fn>`(x)
+[90m  2. [39mggplot2:::print.ggplot(x)
+[90m  4. [39mggplot2:::ggplot_build.ggplot(x)
+[90m  5. [39mggplot2:::by_layer(...)
+[90m 12. [39mggplot2 (local) f(l = layers[[i]], d = data[[i]])
+[90m 13. [39ml$compute_aesthetics(d, plot)
+[90m 14. [39mggplot2 (local) compute_aesthetics(..., self = self)
+[90m 15. [39mggplot2:::scales_add_defaults(...)
+[90m 18. [39mggplot2:::find_scale(aes, datacols[[aes]], env)
+[90m 19. [39mggplot2 (local) [1m[94mscale_f([39m[22m[1m[94m)[39m[22m
+"

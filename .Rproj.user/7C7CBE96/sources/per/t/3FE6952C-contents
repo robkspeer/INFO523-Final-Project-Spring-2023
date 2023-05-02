@@ -1,0 +1,747 @@
+---
+title:  'Homework 5'
+subtitle: 'INFO 523'
+author:
+- name: Student -  Rob Speer
+- name: Instructor -  Cristian Román-Palacios
+  affiliation: School of Information, University of Arizona, Tucson, AZ
+tags: [R, RStudio, HW5]
+output: html_document
+
+---
+
+---------------
+
+### Objectives
+This HW mainly focus on assessing your knowledge related to association rules and clustering techniques.
+
+---------------
+
+#### Additional resources relevant to this HW
+- **R Markdown**: Please review the basic R Markdown cheat sheet in case you have any questions regarding formatting the HW: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf.
+
+- **R**: Please review the basic `R` cheat sheet in case you have any questions regarding the programming language: https://www.soa.org/globalassets/assets/Files/Edu/2018/exam-pa-base-r.pdf.
+
+- **RStudio**: Additional cheat sheets written by RStudio to help with specific R packages: https://www.rstudio.com/resources/cheatsheets/
+
+
+### Scores and grading policies
+
+There is a very basic auto-grading system implemented at the end of the assignment. Use that workflow as a reference. **If you're confident that answer is correct but it's still marked as Incorrect by the autograder, please get in touch with the instructor.** Grades are **NOT exclusively based on your final answers**. I will be grading the overall structure and logic of your code. Feel free to use as many lines as you need to answer each of the questions. I also highly recommend and strongly encourage adding comments (`#`) to your code. Comments will certainly improve the reproducibility and readability of your submission. Commenting your code is also good coding practice. **Specifically for the course, you’ll get better feedback if the instructor is able to understand your code in detail.** 
+
+
+### Submission:
+ This HW is due at the end of the same week that is released (**Sunday, 11:59 pm AZ time**). Please get in touch with the instructor if you’re (i) having issues opening the assignment, (2) not understanding the questions or (3) having issues submitting your assignment. Note that late submissions are subject to a penalty (see late work policies in the Syllabus). By the deadline, you should turn in a a `RMD` file (this file) **and** a rendered `HTML` (hint: knit your `rmd`; link: https://rmarkdown.rstudio.com/lesson-9.html). Answers to each question should be in the relevant block of code (see below). The instructor won't render your submission. **There's no need to rename your submission**. Make sure that you can correctly render your submission without errors before turning anything in. If a given block of code is causing issues and you didn’t get to fix it, please use `r eval=FALSE `the in the relevant block and add comments. **This assignment must be submitted through our GitHub Classroom before the deadline.**
+
+
+### Time commitment
+Please reach out if you’re taking more than ~18h to complete (1) this HW, (2) reading the book chapters, and (3) going over the lectures. I will be happy to provide accommodations if necessary. **Do not wait until the last minute to start working on this HW**. In most cases, working under pressure will certainly increase the time needed to answer each of these questions and the instructor might not be 100% available on Sundays to troubleshoot with you. Remember that you can sign up office hours with the instructor 3 times a week.
+
+
+### Looking for help?
+First, please go over the relevant readings for this week. Second, if you’re still struggling with any of the questions, do some independent research (e.g. stackoverflow is a wonderful resource). Don’t forget that your classmates will also be working on the same questions - reach out for help (check under the Discussion forum for folks looking to interact with other students in this class or start your own thread). Finally, the instructor will be happy to answer any questions during office hours. You can reach out to me by email (cromanpa94@arizona.edu) or simply schedule a 15 minute meeting through **Calendly** (https://calendly.com/cromanpa/15min). **Do not forget that the instructor holds office hours 3 times a week!!**
+
+
+---------------
+# Questions
+
+If you decide to answer any of the conceptual questions in the RMD, please assign any string to the expected final object (e.g. `q1.1 <- "A"`).
+
+## Conceptual
+
+#### Question 1
+
+Explain one class SVM in the context of anomaly detection.
+
+```{r}
+# BEGIN SOLUTION
+q1 <-
+'
+One-class Support Vector Machine (SVM) is an algorithm used to dectect whether
+a value is part of a classification (the "one-class" in Once-Class SVM) or not.
+
+For example, if the dataset results in one cluster, the one-class SVM model
+will determine if a given value is inside the cluster, or outside of it. If the
+new value is outside of the cluster, it is an anomaly.
+
+'
+# END SOLUTION
+```
+
+
+#### Question 2
+
+What is the importance of centering and scaling your data? How is that related to having different units in your dataset?
+
+![](Lect10_Slide10_bookFreq.png)
+
+```{r}
+# BEGIN SOLUTION
+q2 <-
+'
+Centering and scaling data is important to better visualize the complete
+dataset and show the appropriate level of detail.
+
+For exmaple, the above graph, from Lecture 10, shows the frequency of the number
+of books included in one purchase. We can tell from the summary(bookCount)
+results that the maximum number is 2502, but the graph shows up to 10,000, which
+means most of this X axis of this (log) graph isnt showing any data.
+
+The mean is 4.638, and a median of 1, so focusing the graph around these values
+will show the largest amount of important values on the graph.
+'
+# END SOLUTION
+```
+
+
+#### Question 3
+
+How would you make predictions using K-means clustering? Find at least one function in `R` that performs k-means clustering.
+
+```{r}
+# BEGIN SOLUTION
+q3 <-
+'
+K-means is an unsupervised method of cluster analysis. By providing clustering
+in the example of purchasing, you can make predictions such as "if a person
+buys this, they also likely to buy that", or "every time you see the item set
+X in a transaction, you expect to also see Y."
+
+
+The kmeans() function in R stats package is a simplified way of calculating
+k-means in the following format:
+
+kmeans(x, centers, iter.max = 10, nstart = 1,
+       algorithm = c("Hartigan-Wong", "Lloyd", "Forgy",
+                     "MacQueen"), trace=FALSE)
+
+https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/kmeans
+
+
+'
+# END SOLUTION
+```
+
+
+#### Question 4
+
+To the best of your capacity, define and explain principal component analysis (`PCA`).
+
+![](Lecture10_Slide33_crossValidation.png)
+
+
+```{r}
+# BEGIN SOLUTION
+q4 <- 
+'
+Principal Component Analysis is a method of reducing data which "combines the
+attributes by creating an alternative, smaller set of variables" (Han et al 2012).
+
+Robert Kabacoff (2011) describes PCA using the following example:
+"For example, you might use PCA to transform 30 correlated (and possibly
+redundant) environmental variables into five uncorrelated composite variables
+that retain as much information from the original set of variables as possible."
+
+This helps in cross-validation when comparing clustering, so that the PCA
+subset can be used to cross-validate k-means clustering, like the right-hand
+figure in Slide 33 of Lecture 42 (shown above).
+
+'
+# END SOLUTION
+```
+
+
+
+## Applied
+
+
+### Association rules
+
+We will be using the `titanic` dataset from HW4. I’ll provide the dataset in this assignment. Please load it into your `R` workspace using the `load()` function. 
+
+```{r}
+library(here)
+load(here('data','titanic.RData'))
+```
+
+Please answer any of the questions using code in `R`. **Note that questions 5, 6, and 7 build on each other and are all related to the `titanic` dataset**.
+
+#### Question 5
+Let's briefly review the titanic dataset.
+
+5.1.	Compute the percentage of passengers that were children (`Age` == `Child`). 
+
+```{r}
+# BEGIN SOLUTION
+
+# titanic
+library(tidyverse)
+library(scales)
+
+## Question specifies "Passengers"
+passenger_filter <- titanic %>%
+  filter(Class != "Crew")
+
+age_summarize <- passenger_filter %>%
+  group_by(Age) %>% ## Question specifies "Passengers"
+  count(Age)
+# age_summarize
+
+age_percentage <- age_summarize %>%
+  mutate(percent = n/nrow(passenger_filter))
+# age_percentage
+
+age_plot <- ggplot(age_percentage, aes(x="", y=n, fill=Age)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  theme(axis.ticks.x=element_blank(),
+        axis.title.x=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.title.y=element_blank()) +
+        ggtitle("Percent of passengers that were children") +
+        geom_text(aes(label = label_percent()(percent)),
+                  position = position_stack(vjust = 0.5))
+
+percent_children <- age_percentage %>% filter(Age == 'Child') %>% pull(percent)
+#percent_children
+
+q5.1 <- percent_children * 100
+
+age_plot
+knitr::kable(q5.1, align = "lccrr", caption = "percentage of passengers that were children", digits = 1)
+# END SOLUTION
+```
+
+
+5.2.	Compute the percentage of passengers that were women (i.e. woman and adult). 
+
+```{r}
+# BEGIN SOLUTION
+
+## Question specifies "Passengers" <-- Incorrect!
+# passenger_filter <- titanic %>% filter(Class != "Crew")
+
+gender_summarize <- titanic %>%
+  group_by(Sex, Age) %>%
+  count(Sex)
+#gender_summarize
+
+gender_percentage <- gender_summarize %>%
+  mutate(percent = n/nrow(titanic)) %>%
+  filter(Age == "Adult")
+#gender_percentage
+
+gender_plot <- ggplot(gender_percentage, aes(x="", y=n, fill=Sex)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  theme(axis.ticks.x=element_blank(),
+        axis.title.x=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.title.y=element_blank()) +
+  scale_fill_manual(values=c("pink", "blue")) +
+  ggtitle("Percent of passengers that were WOMEN (ie female and adult") +
+  geom_text(aes(label = label_percent()(percent)),
+            position = position_stack(vjust = 0.5))
+
+percent_women <- gender_percentage %>% filter(Sex == 'Female') %>% pull(percent)
+
+q5.2 <- percent_women * 100
+
+gender_plot
+knitr::kable(q5.2, align = "lccrr", caption = "percentage of passengers that were women", digits = 1)
+# END SOLUTION
+```
+
+
+5.3.	Compute the percentage of passengers that were in first class. 
+
+```{r}
+# BEGIN SOLUTION
+## Question specifies "Passengers" <-- Incorrect!
+# passenger_filter <- titanic %>% filter(Class != "Crew")
+
+class_summarize <- titanic %>%
+  group_by(Class) %>%
+  count(Class)
+#class_summarize
+
+class_percentage <- class_summarize %>%
+  mutate(percent = n/nrow(titanic))
+#class_percentage
+
+class_plot <- ggplot(class_percentage, aes(x="", y=n, fill=Class)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  theme(axis.ticks.x=element_blank(),
+        axis.title.x=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.title.y=element_blank()) +
+  scale_fill_manual(values=c("green", "yellow", "orange", "darkred")) +
+  ggtitle("Percent of passengers that were in 1st class") +
+  geom_text(aes(label = label_percent()(percent)),
+            position = position_stack(vjust = 0.5))
+
+percent_first_class <- class_percentage %>% filter(Class == '1st') %>% pull(percent)
+
+q5.3 <- percent_first_class * 100
+
+class_plot
+knitr::kable(q5.3, align = "lccrr", caption = "percentage of passengers that were in first class", digits = 1)
+# END SOLUTION
+```
+
+
+5.4.	Compute the percentage of people that survived. 
+
+```{r}
+# BEGIN SOLUTION
+
+## This question does not specify "Passengers", just "people"
+survived_summarize <- titanic %>%
+  group_by(Survived) %>%
+  count(Survived)
+#survived_summarize
+
+survived_percentage <- survived_summarize %>%
+  mutate(percent = n/nrow(titanic))
+#survived_percentage
+
+survived_plot <- ggplot(survived_percentage, aes(x="", y=n, fill=Survived)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  theme(axis.ticks.x=element_blank(),
+        axis.title.x=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.title.y=element_blank()) +
+  scale_fill_manual(values=c("darkred", "darkgreen")) +
+  ggtitle("Percent of PEOPLE that Survived") +
+  geom_text(aes(label = label_percent()(percent)),
+            position = position_stack(vjust = 0.5))
+
+percent_survived <- survived_percentage %>% filter(Survived == 'Yes') %>% pull(percent)
+
+q5.4 <- percent_survived * 100
+
+survived_plot
+knitr::kable(q5.4, align = "lccrr", caption = "percentage of people that survived", digits = 1)
+# END SOLUTION
+```
+
+
+5.5.	What percentage of children survived?  
+
+```{r}
+# BEGIN SOLUTION
+children_survived_summarize <- titanic %>%
+  group_by(Age, Survived) %>%
+  count(Survived) %>%
+  filter(Age == 'Child')
+#children_survived_summarize
+
+children_survived_count <- titanic %>%
+  filter(Age == 'Child')
+
+child_survived_percentage <- children_survived_summarize %>%
+  mutate(percent = n/nrow(children_survived_count))
+#child_survived_percentage
+
+child_survived_plot <- ggplot(child_survived_percentage, aes(x="", y=n, fill=Survived)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  theme(axis.ticks.x=element_blank(),
+        axis.title.x=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.title.y=element_blank()) +
+  scale_fill_manual(values=c("darkred", "darkgreen")) +
+  ggtitle("Percent of CHILDREN that Survived") +
+  geom_text(aes(label = label_percent()(percent)),
+            position = position_stack(vjust = 0.5))
+
+child_percent_survived <- child_survived_percentage %>% filter(Survived == 'Yes') %>% pull(percent)
+
+q5.5 <- child_percent_survived * 100
+
+child_survived_plot
+knitr::kable(q5.5, align = "lccrr", caption = "percentage of children survived", digits = 1)
+# END SOLUTION
+```
+
+
+5.6.	What percentage of women survived? 
+
+```{r}
+# BEGIN SOLUTION
+women_survived_summarize <- titanic %>%
+  group_by(Sex, Survived, Age) %>%
+  count(Survived) %>%
+  filter(Sex == "Female", Age == "Adult")
+#women_survived_summarize
+
+women_survived_count <- titanic %>%
+  filter(Sex == "Female", Age == "Adult")
+
+women_survived_percentage <- women_survived_summarize %>%
+  mutate(percent = n/nrow(women_survived_count))
+#women_survived_percentage
+
+women_survived_plot <- ggplot(women_survived_percentage, aes(x="", y=n, fill=Survived)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  theme(axis.ticks.x=element_blank(),
+        axis.title.x=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.title.y=element_blank()) +
+  scale_fill_manual(values=c("darkred", "darkgreen")) +
+  ggtitle("Percent of WOMEN that Survived (ie female and adult)") +
+  geom_text(aes(label = label_percent()(percent)),
+            position = position_stack(vjust = 0.5))
+
+women_percent_survived <- women_survived_percentage %>% filter(Survived == 'Yes') %>% pull(percent)
+
+q5.6 <- women_percent_survived * 100
+
+women_survived_plot
+knitr::kable(q5.6, align = "lccrr", caption = "percentage of women survived", digits = 1)
+# END SOLUTION
+```
+
+
+5.7.	What percentage of first-class passengers survived? 
+
+```{r}
+# BEGIN SOLUTION
+firstclass_survived_summarize <- titanic %>%
+  group_by(Class, Survived) %>%
+  count(Survived) %>%
+  filter(Class == "1st")
+#firstclass_survived_summarize
+
+firstclass_survived_count <- titanic %>%
+  filter(Class == "1st")
+
+firstclass_survived_percentage <- firstclass_survived_summarize %>%
+  mutate(percent = n/nrow(firstclass_survived_count))
+#firstclass_survived_percentage
+
+firstclass_survived_plot <- ggplot(firstclass_survived_percentage, aes(x="", y=n, fill=Survived)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  theme(axis.ticks.x=element_blank(),
+        axis.title.x=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.title.y=element_blank()) +
+  scale_fill_manual(values=c("darkred", "darkgreen")) +
+  ggtitle("Percent of FIRST CLASS that Survived") +
+  geom_text(aes(label = label_percent()(percent)),
+            position = position_stack(vjust = 0.5))
+
+firstclass_percent_survived <- firstclass_survived_percentage %>% filter(Survived == 'Yes') %>% pull(percent)
+
+q5.7 <- firstclass_percent_survived * 100
+
+firstclass_survived_plot
+knitr::kable(q5.7, align = "lccrr", caption = "percentage of first-class passengers survived", digits = 1)
+# END SOLUTION
+```
+
+
+5.8.	What percentage of third-class passengers survived? 
+
+```{r}
+# BEGIN SOLUTION
+thirdclass_survived_summarize <- titanic %>%
+  group_by(Class, Survived) %>%
+  count(Survived) %>%
+  filter(Class == "3rd")
+#thirdclass_survived_summarize
+
+thirdclass_survived_count <- titanic %>%
+  filter(Class == "3rd")
+
+thirdclass_survived_percentage <- thirdclass_survived_summarize %>%
+  mutate(percent = n/nrow(thirdclass_survived_count))
+#thirdclass_survived_percentage
+
+thirdclass_survived_plot <- ggplot(thirdclass_survived_percentage, aes(x="", y=n, fill=Survived)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  theme(axis.ticks.x=element_blank(),
+        axis.title.x=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.title.y=element_blank()) +
+  scale_fill_manual(values=c("darkred", "darkgreen")) +
+  ggtitle("Percent of THIRD CLASS that Survived") +
+  geom_text(aes(label = label_percent()(percent)),
+            position = position_stack(vjust = 0.5))
+
+thirdclass_percent_survived <- thirdclass_survived_percentage %>% filter(Survived == 'Yes') %>% pull(percent)
+
+q5.8 <- thirdclass_percent_survived * 100 #Replace NULL with your final answer
+
+thirdclass_survived_plot
+knitr::kable(q5.8, align = "lccrr", caption = "percentage of third-class passengers survived", digits = 1)
+# END SOLUTION
+```
+
+
+#### Question 6
+
+These questions are also related to the `titanic` dataset. However, we will be implementing some **functions** to summarize information from the `titanic` dataset.
+
+6.1.	Create a **function** that subsets a given data frame by using `sex`, `age`, `class` and `survival` as arguments. This function should return a new `data.frame` of passengers that satisfies a specified criteria (see more details in `q6.2`).
+
+```{r}
+# BEGIN SOLUTION
+
+function.q6.1 <- function(sex, age, class, survival) {
+  if(hasArg(survival)) {
+    subset_df <- titanic %>% filter(Sex==sex, Age==age, Class==class, Survived==survival)
+  }
+  else {
+    subset_df <- titanic %>% filter(Sex==sex, Age==age, Class==class)
+  }
+  return(subset_df)
+}
+
+# function.q6.1("Female", "Adult", "1st")
+# END SOLUTION
+```
+
+6.2.	Using `function.q6.1`, create another function (`function.6.2`) that calculates the percentages of people who lived or died in a given category (e.g. "Female","Adult","1st"). This function (`function.6.2`) should return a data.frame with the following structure:
+
+| SurvivalPerc | FatalityPerc |
+|--------------|--------------|
+| Val1         | Val2         |
+
+
+```{r}
+# BEGIN SOLUTION
+function.6.2 <- function(sex, age, class) {
+  subset_df <- function.q6.1(sex, age, class)
+  
+	subset_df_summarize <- subset_df %>%
+	  group_by(Sex, Age, Class, Survived) %>%
+	  count(Survived)
+
+	subset_df_count <- nrow(subset_df)
+
+	survived_percentage <- subset_df_summarize %>%
+	  mutate(Percent = (n / subset_df_count) * 100)
+
+	selected_columns <- survived_percentage[, c("Survived", "Percent")]
+	
+	pivot_df <- selected_columns %>%
+	  pivot_wider(names_from = Survived, values_from = Percent)
+  
+  if(!"No" %in% names(pivot_df)) {
+    pivot_df <- pivot_df %>%
+      add_column(No = 0)
+  }
+	  
+	final_df <- pivot_df %>%
+	  relocate(Yes, No) %>%
+	  rename(SuvivalPerc = Yes) %>%
+	  rename(FatalityPerc = No)
+
+  return(final_df)
+}
+
+# END SOLUTION
+```
+
+
+6.2.a.	Compare survival rates between men and boys in third-class fares. Use `function6.2.`
+
+```{r}
+# BEGIN SOLUTION
+q6.2a.1 <- function.6.2("Male", "Adult", "3rd") #Survival rate men in third-class fares
+q6.2a.2 <- function.6.2("Male", "Child", "3rd") #Survival rate children in third-class fares
+
+knitr::kable(q6.2a.1, align = "lccrr", caption = "Survival Rate of Male, Adult, 3rd Class", digits = 1)
+knitr::kable(q6.2a.2, align = "lccrr", caption = "Survival Rate of Male, Child, 3rd Class", digits = 1)
+# END SOLUTION
+```
+
+
+6.2.b.	Compare survival rates between women and girls in first-class fares. Use `function6.2.`
+
+```{r}
+# BEGIN SOLUTION
+q6.2b.1 <- function.6.2("Female", "Adult", "1st") #Survival rate women in first-class fares
+q6.2b.2 <- function.6.2("Female", "Child", "1st") #Survival rate girls in first-class fares
+
+knitr::kable(q6.2b.1, align = "lccrr", caption = "Survival Rate of Female, Adult, 1st Class", digits = 1)
+knitr::kable(q6.2b.2, align = "lccrr", caption = "Survival Rate of Female, Child, 1st Class", digits = 1)
+# END SOLUTION
+```
+
+
+#### Question 7
+
+This final section will focus on generating association rules with the `arules` package in `R` based on the titanic dataset.
+
+
+7.1.	Calculate some association rules using `apriori()` command. Please focus on the passengers who survived only: Use the following `appearence` argument in the `apriori` function:
+
+```{r}
+set.seed(3)
+appearance = list(default = "lhs", rhs = ("Survived=Yes"))
+
+# BEGIN SOLUTION
+library(arules)
+
+titanic_rules <- apriori(titanic, parameter = list(support = 0.001, confidence = 0.2), appearance = appearance)
+
+# titanic_rules
+
+q7.1 <- titanic_rules #Replace NULL with your final answer
+# END SOLUTION
+```
+
+
+7.2.	Please visualize the results (use the `arulesViz`). Add captions to each of the figures you generate. Explain the meaning of the axes.
+
+```{r}
+# BEGIN SOLUTION
+library(arulesViz)
+plot(titanic_rules)
+plot(titanic_rules, method="grouped")
+plot(titanic_rules, method="graph")
+
+plot_caption <- '
+
+1) Support: In these plots, Support is the combination of LHS and RHS.
+The Left Hand Side (LHS) are the combinations of variables in the
+table: Age, Sex, Class. The Right Hand Side (RHS) was defined as Survival.
+
+In our case, this means "When LHS was true, did they survive (RHS)?"
+
+A higher Support number means that the statement is more true, ie:
+"When Gender is Female (LHS), there is a greater chance of Survival (RHS)"
+
+2) Lift: How often the condition happens compared to the estimated chance for
+it to happen. ie: the probability of "Female" and "Survived" being in the same row
+would lead to a higher Lift value.
+
+3) Confidence: How confident the condition is. A higher score means a higher
+confidence that the condition is true. IE Female Children had a 100% survival rate,
+the confidence is 1.0'
+
+# END SOLUTION
+```
+
+7.3.	Sort the list of previously created rules. Use a `lift > 3.0` to find the best rules. Briefly explain the best set of rules.
+
+```{r}
+# BEGIN SOLUTION
+lift_greater_three <- subset(titanic_rules, subset = lift > 3)
+sorted_rules <- sort(lift_greater_three, by="lift")
+
+inspect(sorted_rules)
+
+q7.3 <- sorted_rules #Replace NULL with your final answer
+# END SOLUTION
+```
+
+7.4.	Using `function.6.2`, estimate the percentage of survival for the best two rules selected in `7.3`. 
+
+```{r}
+# BEGIN SOLUTION
+q7.4.1 <- function.6.2("Female", "Child", "2nd") # #3 with lift of 3.095649
+q7.4.2 <- function.6.2("Male", "Child", "2nd") # #7 with lift of 3.009650
+
+knitr::kable(q7.4.1, align = "lccrr", caption = "Survival Rate of Female, Child, 2nd Class", digits = 1)
+knitr::kable(q7.4.2, align = "lccrr", caption = "Survival Rate of Female, Adult, 1st Class", digits = 1)
+
+# END SOLUTION
+```
+
+
+7.5. Refer to HW4-Question 6.2 and  briefly comment on your answers that particular question.
+
+```{r}
+# BEGIN SOLUTION
+q7.5 <- '
+The Association Rules with the highest Lift value that I tested with 
+function.6.2 had 100% survival rates. In 7.4, I tested rules ranked #3 and #4
+because I did not handle the case of not passing a Gender argument to the
+function (tho I did handle not passing a Survival argument to function.6.1).
+
+These high Lift values suggest that:
+When Age is Child and Class is 2nd, (LHS) there is a greater chance of Survival (RHS)
+
+This supports the answers in HW-4 Q6.2, where it was found that younger
+passengers survived more often, and females survived more often then males.
+'
+# END SOLUTION
+```
+
+
+### Extra Credit (K-centers clustering; 2 points)
+Please implement a function (or set of functions) that perform k-means and k-median clustering on a training dataset. The overall procedure was reviewed in the slides. More information on the algorithm and its implementation is available in Cichoz Ch12. However, feel free to use any other source. Please annotate your code (add as many details as needed) and cite any relevant sources.
+
+You will run your function in the California housing prices: https://raw.githubusercontent.com/mohitgupta-omg/Kaggle-California-Housing-Prices/master/Data/housing.csv  
+
+Before fitting inferring the clusters, please:
+
+EC.1 Drop any observations of houses on Islands. Use median values per column to impute any missing observation.
+
+```{r}
+# BEGIN SOLUTION
+qEC.1 <- NULL #Replace NULL with your final answer
+# END SOLUTION
+```
+
+
+EC.2 Remove collinearity in the dataset (i.e. keep columns such that all r<0.7)
+
+```{r}
+# BEGIN SOLUTION
+qEC.2 <- NULL #Replace NULL with your final answer
+# END SOLUTION
+```
+
+EC.3 Create a training (70% of observations) and testing datasets (30%). Please set a `seed` to `3`. Use the training dataset only.
+
+```{r}
+# BEGIN SOLUTION
+qEC.3.train <- NULL #Replace NULL with your final answer
+qEC.3.test <- NULL #Replace NULL with your final answer
+# END SOLUTION
+```
+
+
+8.4 Fit the `k-means` algorithm on the scaled `q8.3` dataset. Next, answer whether k=3 or k=4 should provide a more reasonable representation of the dataset. Focus on analyzing the total within-cluster sum of squares for each k. Use `q8.4` to indicate whether 3 or 3 k is better under these conditions (i.e. a number).
+
+```{r}
+# BEGIN SOLUTION
+qEC.4 <- NULL #Replace NULL with your final answer
+# END SOLUTION
+```
+
+
+## Some quick feedback
+
+**Do NOT modify this section.** 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, comment=NA}
+##Please make sure the following packages are installed
+library(digest); library(here); library(rmarkdown)
+load(here("tests", "ref_WS.RData"))
+save.image(here("tests", "answers_WS.RData"))
+ .grade(submission = list(q1, q2, q3, q4, q5.1, q5.2,
+                        q5.3, q5.4, q5.5, q5.6, q5.7,
+                        q5.8, q6.2a.1, q6.2a.2, q6.2b.1, q6.2b.2,
+                        q7.1, q7.1, q7.3, q7.4.1, q7.4.2, q7.5,
+                        qEC.1, qEC.2, qEC.3.train, qEC.3.test, qEC.4
+                        )
+        )
+
+cat("Last updated on:", format(Sys.time(),usetz = TRUE))
+```
+
+```{r echo= FALSE, message=FALSE, warning=FALSE, include=FALSE, results='hide'}
+render("README.Rmd", quiet = T)
+```
+
+

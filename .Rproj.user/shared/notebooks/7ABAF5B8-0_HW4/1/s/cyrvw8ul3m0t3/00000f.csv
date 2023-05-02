@@ -1,0 +1,35 @@
+"0","# BEGIN SOLUTION"
+"0","library(plotly)"
+"2","Registered S3 method overwritten by 'data.table':
+  method           from
+  print.data.table     
+"
+"2","Registered S3 method overwritten by 'htmlwidgets':
+  method           from         
+  print.htmlwidget tools:rstudio
+"
+"2","
+Attaching package: ‘plotly’
+
+"
+"2","The following object is masked from ‘package:ggplot2’:
+
+    last_plot
+
+"
+"2","The following object is masked from ‘package:stats’:
+
+    filter
+
+"
+"2","The following object is masked from ‘package:graphics’:
+
+    layout
+
+"
+"0","titanic_grouped <- q5.3 %>% group_by(Sex) %>% summarize(child_sum=sum(Freq[Age=='Child']), adult_sum=sum(Freq[Age=='Adult']))"
+"0","# titanic_grouped"
+"0","plotly_barchart <- plot_ly(titanic_grouped, x=~Sex, y=~adult_sum, type='bar', name = 'Sex')"
+"0","plotly_barchart <- plotly_barchart %>% add_trace(y = ~child_sum, name = 'Age')"
+"0","plotly_barchart <- plotly_barchart %>% layout(barmode = 'stack')"
+"0","plotly_barchart"

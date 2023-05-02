@@ -1,0 +1,3 @@
+"0","# BEGIN SOLUTION"
+"0","q5.4 <- ggplot(q5.3, aes(x=Class, y=Freq))"
+"0","q5.4"

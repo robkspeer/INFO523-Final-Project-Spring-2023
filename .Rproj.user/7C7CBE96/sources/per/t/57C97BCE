@@ -1,0 +1,28 @@
+{
+    "id": "57C97BCE",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1682971893081.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "id": "bfe2f3a325d24c50ba478716cb387f6c",
+        "name": "meterread_plot",
+        "title": "meterread_plot",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 25896196080074853,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1682971893081,
+    "read_only": false,
+    "read_only_alternatives": []
+}

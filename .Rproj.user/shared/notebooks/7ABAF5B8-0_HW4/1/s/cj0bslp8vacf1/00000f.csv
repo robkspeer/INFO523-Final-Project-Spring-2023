@@ -1,0 +1,3 @@
+"0","library(here)"
+"0","load(here(""tests"", ""ref_WS.RData""))"
+"0","head(.data.q7) #Your target dataset"

@@ -1,0 +1,6 @@
+"0","plot(titanic_rules, method=""grouped"")"
+"2","Registered S3 methods overwritten by 'registry':
+  method               from 
+  print.registry_field proxy
+  print.registry_entry proxy
+"
